@@ -31,6 +31,6 @@ workflows:
   default:
     jobs:
       - print_world
-      - print_hello
+      - print_hello:
           requires:
-            - print_hello
+            - print_world
