@@ -30,7 +30,7 @@ jobs:
 workflows:
   default:
     jobs:
-      - print_world
-      - print_hello:
+      - print_hello
+      - print_world:
           requires:
-            - print_world
+            - print_hello
