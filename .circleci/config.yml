@@ -12,8 +12,8 @@ jobs:
 
     steps:
       - checkout
-      - run 
-        name: print-hello
+      - run: 
+        name: print hello
         command: echo "hello"
   
   print_world:
@@ -22,8 +22,8 @@ jobs:
     
     steps:
       - checkout
-      - run
-        name: print-world
+      - run:
+        name: print world
         command: echo "world"
 
 
