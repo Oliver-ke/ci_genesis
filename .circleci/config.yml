@@ -13,8 +13,8 @@ jobs:
     steps:
       - checkout
       - run: 
-        name: print hello
-        command: echo "hello"
+          name: print hello
+          command: echo "hello"
   
   print_world:
     docker:
@@ -23,8 +23,8 @@ jobs:
     steps:
       - checkout
       - run:
-        name: print world
-        command: echo "world"
+          name: print world
+          command: echo "world"
 
 
 workflows:
