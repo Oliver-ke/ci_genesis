@@ -15,6 +15,9 @@ jobs:
       - run: 
           name: print hello
           command: echo "hello"
+      - run:
+          name: print my env
+          command: echo ${DEVOPS}
   
   print_world:
     docker:
