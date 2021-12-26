@@ -9,12 +9,13 @@ jobs:
     steps:
       - run:
           command: return 1
-      - rollback:
+      - run:
           when: on_fail
           command: echo sending msg to slack channel
   
 
 workflows:
   default:
-    - deploy
+    jobs:
+     - deploy
 
