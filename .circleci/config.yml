@@ -6,34 +6,35 @@ orbs:
   welcome: circleci/welcome-orb@0.4.1
 
 jobs:
-  print_hello:
-    docker: 
-      - image: circleci/node:13.8.0
 
-    steps:
-      - checkout
-      - run: 
-          name: print hello
-          command: echo "hello"
-      - run:
-          name: print my env
-          command: echo ${DEVOPS}
-  
-  print_world:
-    docker:
-      - image: circleci/node:13.8.0
-    
-    steps:
-      - checkout
-      - run:
-          name: print world
-          command: echo "world"
+  save_hello_world_output:
+      docker:
+        - image: circleci/node:13.8.0
+      steps:
+        - checkout
+        - run:
+            name: make a file with hello world
+            command: echo "Hello World" > output.txt
+        - persist_to_workspace:
+            root: /tmp/logs
+            paths:
+              - /*
+
+  print_output_file:
+      docker:
+        - image: circleci/node:13.8.0
+      steps:
+        - checkout
+        - attach_workspace:
+            at: /tmp/logs
+        - run:
+            name: print file with hello text
+            command: cat output.txt
 
 
 workflows:
   default:
     jobs:
-      - print_hello
-      - print_world:
-          requires:
-            - print_hello
+      - save_hello_world_output
+      - print_output_file
+
