@@ -9,18 +9,12 @@ jobs:
     steps:
       - run:
           command: return 1
-  
-  roll_back:
-    docker:
-        - image: cimg/base:stable
-    when: on_fail
-    steps:
-      - run:
+      - rollback:
+          when: on_fail
           command: echo sending msg to slack channel
+  
 
 workflows:
   default:
     - deploy
-    - roll_back:
-        requires: deploy
 
