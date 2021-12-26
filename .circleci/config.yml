@@ -26,7 +26,7 @@ jobs:
       steps:
         - checkout
         - attach_workspace:
-            at: .
+            at: ~/ci_genesis
         - run:
             name: print file with hello text
             command: cat output.txt
