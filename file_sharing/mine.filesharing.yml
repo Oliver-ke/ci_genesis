@@ -1,0 +1,39 @@
+version: 2.1
+
+jobs:
+
+  save_hello_world_output:
+      working_directory: ~/ci_genesis
+      docker:
+        - image: circleci/node:13.8.0
+      steps:
+        - checkout
+        - run:
+            name: make a file with hello_world text
+            command: echo "Hello World" > output.txt
+        - persist_to_workspace:
+            root: .
+            paths:
+              - .
+
+  print_output_file:
+      working_directory: ~/ci_genesis
+      docker:
+        - image: circleci/node:13.8.0
+      steps:
+        - checkout
+        - attach_workspace:
+            at: ~/ci_genesis
+        - run:
+            name: print file with hello text
+            command: cat output.txt
+
+
+workflows:
+  default:
+    jobs:
+      - save_hello_world_output
+      - print_output_file:
+          requires: 
+            - save_hello_world_output
+
